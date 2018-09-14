@@ -6,7 +6,7 @@
 name: Hamid FzM
 
 # Short bio or description (displayed in the header)
-description: Software/Hardware Developer from Tehran
+description: یه توسعه‌دهنده خسته دیگه
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://avatars2.githubusercontent.com/u/5591800
@@ -53,7 +53,7 @@ baseurl: ""
 # !! You don't need to change any of the configuration flags below !!
 #
 
-permalink: /:title/
+permalink: /posts/:title/
 
 # The release of Jekyll Now that you're using
 version: v1.2.0
