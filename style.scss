@@ -165,10 +165,10 @@ img {
 }
 
 .site-avatar {
-  float: left;
+  float: right;
   width: 70px;
   height: 70px;
-  margin-right: 15px;
+  margin-left: 15px;
 
   @include mobile {
     float: none;
@@ -182,7 +182,7 @@ img {
 }
 
 .site-info {
-  float: left;
+  float: right;
 
   @include mobile {
     float: none;
@@ -212,7 +212,7 @@ img {
 }
 
 nav {
-  float: right;
+  float: left;
   margin-top: 23px; // @TODO: Vertically middle align
   font-family: $fonts;
   font-size: 18px;
