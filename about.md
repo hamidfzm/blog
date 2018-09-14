@@ -1,15 +1,11 @@
 ---
 layout: page
-title: About
-permalink: /about/
+title: درباره‌ی من
+permalink: /about
 ---
 
-Some information about you!
+فعلا خسته‌ام بعدا میگم
 
-### More Information
+### تماس 
 
-A place to include any other types of information that you'd like to include about yourself.
-
-### Contact me
-
-[email@domain.com](mailto:email@domain.com)
+[contact@hamidfzm.ir](mailto:contact@hamidfzm.ir)
