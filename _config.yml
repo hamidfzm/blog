@@ -16,7 +16,7 @@ avatar: https://avatars2.githubusercontent.com/u/5591800
 #
 
 # Includes an icon in the footer for each username you enter
-footer-links:
+links:
   dribbble:
   email: contact@hamidfzm.ir
   facebook:
@@ -82,3 +82,5 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+  - .idea
+
