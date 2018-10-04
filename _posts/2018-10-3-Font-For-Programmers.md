@@ -1,6 +1,7 @@
 ---
 layout: post
 title: فونت برای برنامه‌نویس‌ها
+image: /assets/2018-10-3-Font-For-Programmers/Demo.gif
 ---
 
 ![Demo](/assets/2018-10-3-Font-For-Programmers/Demo.gif){:align="left" hspace="10" vspace="10" height="200"}
