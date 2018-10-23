@@ -1,9 +1,6 @@
-#
-# This file contains configuration flags to customize your site
-#
 
-# Name of your site (displayed in the header)
-name: Hamid FzM
+title: Hamid FzM
+author: Hamid FzM
 
 # Short bio or description (displayed in the header)
 description: یه توسعه‌دهنده خسته دیگه
