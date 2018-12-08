@@ -66,6 +66,7 @@ Pipenv رو حدود یک سالی هست برنامه‌نویس‌های حر�
 
 ## منابع
 
+- https://bryson3gps.wordpress.com/2017/11/08/stop-everything-start-using-pipenv/
 - https://www.kennethreitz.org/
 - https://pipenv.readthedocs.io/en/latest/
 - https://robots.thoughtbot.com/how-to-manage-your-python-projects-with-pipenv
