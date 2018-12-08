@@ -1,11 +1,11 @@
 ---
 layout: post
-title: روش جدید برای مدیریت Dependencyها در پایتون
+title: روش جدید مدیریت Dependencyها در پایتون
 image: /assets/2018-10-24-Python-New-DPM-Method/pipenv.png
 ---
 
 ![Pipenv](/assets/2018-10-24-Python-New-DPM-Method/pipenv.png){:style="margin: 1em auto; display: block" hspace="10" vspace="10" height="300"}
-خیلی وقت بود که توی پایتون کمبود ابزار‌های مثل yarn، npm و … احساس می‌شد
+خیلی وقت بود که توی پایتون کمبود ابزار‌های مثل yarn، composer و … احساس می‌شد
  تا اینکه چند وقت پیش ابزاری به اسم [Pipenv](https://github.com/pypa/pipenv) ساخته شد، 
  تا هر چیز خوبی که این پکیج‌منیجر‌ها میدن رو تو پایتون هم داشته باشیم و در عین حال ویندوز رو هم آدم حساب کنه (مثل اینکه اون یکی‌ها حساب نمی‌کنن).
 
