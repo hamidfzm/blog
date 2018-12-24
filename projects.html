@@ -1,0 +1,23 @@
+---
+layout: page
+title: پروژه‌ها
+permalink: /projects
+---
+
+<div class="posts" dir="auto">
+    {% for page in site.pages %}
+        {% if page.layout == "project" %}
+            <article class="post">
+
+                <h2><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a></h2>
+
+                <div class="entry">
+                    {{ page.content | strip_html | truncatewords: 50 }}
+                </div>
+
+                <a href="{{ page.baseurl }}{{ page.url }}" class="read-more">ادامه</a>
+            </article>
+        {% endif %}
+    {% endfor %}
+</div>
+
