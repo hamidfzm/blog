@@ -47,6 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 30px;
+
   a {
     color: inherit;
   }
@@ -54,6 +55,7 @@ h1 {
 
 h2 {
   font-size: 24px;
+
   a {
     color: inherit;
   }
@@ -78,6 +80,7 @@ a {
   color: $blue;
   text-decoration: none;
   cursor: pointer;
+
   &:hover, &:active {
     color: $blue;
   }
@@ -205,6 +208,11 @@ img {
   font-weight: 300;
   font-size: 28px;
   letter-spacing: 1px;
+
+  @include mobile {
+    margin: 1em 0 15px;
+    text-align: center;
+  }
 }
 
 .site-description {
@@ -213,7 +221,8 @@ img {
   font-size: 16px;
 
   @include mobile {
-    margin: 3px 0;
+    margin-top: 3px;
+    text-align: center;
   }
 }
 
