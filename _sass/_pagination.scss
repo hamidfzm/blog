@@ -1,0 +1,46 @@
+@import "variables";
+
+.pagination {
+  margin: 4rem auto;
+  text-align: center;
+  font-size: 1rem;
+  color: $gray;
+
+  a {
+    color: $gray;
+    transition: all 0.2s ease;
+  }
+
+  .page_number {
+    display: inline-block;
+    padding: 2px 0;
+  }
+
+  .next, .previous {
+    position: relative;
+    display: inline-block;
+    padding: 2px 15px;
+    border: $lightGray 1px solid;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: border ease 0.3s;
+  }
+
+  .next:hover, .previous:hover {
+    color: $darkerGray;
+    border-color: $darkGray;
+  }
+
+  .previous {
+    float: right;
+  }
+
+  .next {
+    float: left;
+  }
+
+  :after {
+    clear: both;
+  }
+
+}

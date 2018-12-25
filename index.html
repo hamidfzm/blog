@@ -3,16 +3,30 @@ layout: default
 ---
 
 <div class="posts" dir="auto">
-  {% for post in site.posts %}
-    <article class="post">
+    {% for post in paginator.posts %}
+        <article class="post">
 
-      <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
+            <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
-      <div class="entry">
-        {{ post.excerpt }}
-      </div>
+            <div class="entry">
+                {{ post.excerpt }}
+            </div>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">ادامه</a>
-    </article>
-  {% endfor %}
+            <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">ادامه</a>
+        </article>
+    {% endfor %}
+</div>
+
+<div class="pagination" dir="rtl">
+    {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path }}" class="previous">
+            قبلی
+        </a>
+    {% endif %}
+    <span class="page_number">
+    صفحه‌ی  {{ paginator.page }} از {{ paginator.total_pages }}
+  </span>
+    {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path }}" class="next">بعدی</a>
+    {% endif %}
 </div>
