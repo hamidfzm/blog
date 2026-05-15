@@ -327,6 +327,36 @@ nav {
   }
 }
 
+/* ------------ Figures & Comments ------------ */
+
+figure {
+  margin: 28px 0;
+
+  img, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    background: var(--bg-soft);
+    border: 1px solid var(--border-soft);
+    padding: 12px;
+  }
+
+  figcaption {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.55;
+  }
+}
+
+.comments {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
 /* ------------ Footer ------------ */
 
 .wrapper-footer {

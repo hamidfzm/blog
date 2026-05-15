@@ -10,6 +10,12 @@ title: آشنایی با Neon؛ پستگرس سرورلس
 
 [Neon](https://neon.tech) یک نسخه‌ی **سرورلس** از Postgres است که این الگو را عوض می‌کند.
 
+<figure dir="ltr">
+  <img src="{{ '/assets/2026-05-15-Introducing-Neon-Postgres/architecture.svg' | relative_url }}"
+       alt="نمای کلی معماری Neon: compute، Safekeeper و Pageserver به‌علاوه‌ی Object Storage">
+  <figcaption>معماری Neon: لایه‌ی compute از storage جداست. هر برنچ یک compute مستقل دارد؛ WAL از طریق Safekeeper‌ها روی Pageserver می‌نشیند و در نهایت روی S3 ذخیره می‌شود.</figcaption>
+</figure>
+
 ### چیزی که Neon فرق دارد
 
 - **جدا بودن compute و storage.** ذخیره‌سازی روی S3 می‌نشیند و compute هر وقت لازم
@@ -70,6 +76,30 @@ neonctl branches create --name pr-1234 --parent main
   دارد؛ آنجا یک Postgres مدیریت‌شده‌ی معمولی هم می‌تواند ارزان‌تر باشد.
 - وقتی مقررات data residency خیلی محدود است و باید روی زیرساخت خودتان بنشیند.
 
+### آیا می‌توان Neon را self-hosted اجرا کرد؟
+
+پاسخ کوتاه: **بله، اما به‌سادگی Postgres معمولی نیست.**
+
+کد Neon زیر مجوز Apache 2.0 روی
+[github.com/neondatabase/neon](https://github.com/neondatabase/neon)
+متن‌باز است و می‌توانید روی Kubernetes خودتان بالا بیاوریدش. اما برخلاف یک Postgres
+ساده، Neon یک سامانه‌ی توزیع‌شده‌ی سه‌لایه است:
+
+- **Compute nodes** که خود Postgres را اجرا می‌کنند
+- **Safekeeper‌ها** برای quorum روی WAL
+- **Pageserver** که داده را روی Object Storage (S3 یا سازگار با S3) نگه می‌دارد
+
+به‌علاوه به یک Object Store (مثل S3, MinIO, Ceph RGW) و یک کنسول/کنترل‌پلِین برای
+مدیریت پروژه‌ها و برنچ‌ها نیاز دارید. این یعنی برای جمع و جور نگه‌داشتنش به تجربه‌ی
+عملیاتی روی Kubernetes و storage layer نیاز دارید؛ همان دلیلی که برای بیش‌تر تیم‌ها
+استفاده از سرویس مدیریت‌شده‌ی Neon (که از مه ۲۰۲۵
+[بخشی از Databricks](https://www.databricks.com/blog/databricks-acquires-neon) است)
+منطقی‌تر است.
+
+اگر هدف فقط **Postgres روی زیرساخت خودی** است و به branching و scale-to-zero نیاز
+ندارید، یک Postgres مدیریت‌شده‌ی معمولی (CloudNativePG, Stolon, یا حتی یک نمونه‌ی
+ساده روی VM) راه ساده‌تری است.
+
 ---
 
 <div dir="ltr" markdown="1">
@@ -83,6 +113,14 @@ the staging database with the rest of the team.
 
 [Neon](https://neon.tech) is a **serverless** take on Postgres that changes
 that shape.
+
+<figure>
+  <img src="{{ '/assets/2026-05-15-Introducing-Neon-Postgres/architecture.svg' | relative_url }}"
+       alt="High-level Neon architecture: compute nodes, safekeepers and a pageserver backed by object storage">
+  <figcaption>Neon's architecture: compute is separated from storage. Each
+  branch gets its own compute; WAL flows through safekeepers into the
+  pageserver, which persists pages to S3-compatible object storage.</figcaption>
+</figure>
 
 ### What's different
 
@@ -146,5 +184,29 @@ branch time, with its own connection string.
   fixed CPU/RAM; a regular managed Postgres can come out cheaper.
 - Strict data residency rules that require the database to live on your own
   infrastructure.
+
+### Can you self-host Neon?
+
+Short answer: **yes, but it's not as simple as plain Postgres.**
+
+Neon's code is Apache 2.0 licensed and lives at
+[github.com/neondatabase/neon](https://github.com/neondatabase/neon). You can
+run it on your own Kubernetes cluster. But unlike vanilla Postgres, Neon is a
+three-layer distributed system:
+
+- **Compute nodes** that run Postgres itself
+- **Safekeepers** for WAL quorum
+- **Pageserver** that persists data to S3-compatible **object storage**
+  (S3, MinIO, Ceph RGW, ...)
+
+You also need a small control plane to manage projects and branches. In
+practice that means real operational expertise in Kubernetes and a storage
+layer; for most teams Neon's managed service (a
+[Databricks company](https://www.databricks.com/blog/databricks-acquires-neon)
+since May 2025) is the saner choice.
+
+If your only goal is **Postgres on your own infrastructure** and you don't
+need branching or scale-to-zero, a regular managed Postgres setup
+(CloudNativePG, Stolon, or even a single VM) is a much simpler path.
 
 </div>

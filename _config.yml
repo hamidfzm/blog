@@ -21,9 +21,23 @@ links:
   rss: yes
 
 
-# Enter your Disqus shortname (not your username) to enable commenting on posts
-# You can find your shortname on the Settings page of your Disqus account
-disqus: hamidfzm
+# Comments are powered by giscus (GitHub Discussions).
+# To enable:
+#   1. Enable Discussions on the blog repo: https://github.com/hamidfzm/blog/settings
+#   2. Install the giscus GitHub App: https://github.com/apps/giscus
+#   3. Visit https://giscus.app, paste the repo, and copy the repo_id +
+#      category_id values into the block below.
+# Until both _id fields are filled in, comments simply don't render.
+comments:
+  giscus:
+    repo: hamidfzm/blog
+    repo_id: ""           # paste from giscus.app
+    category: Comments    # the GitHub Discussions category to use
+    category_id: ""       # paste from giscus.app
+    mapping: pathname
+    input_position: top
+    theme: preferred_color_scheme
+    lang: fa
 
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics: UA-125825710-1

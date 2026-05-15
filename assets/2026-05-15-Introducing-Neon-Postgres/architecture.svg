@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420" font-family="-apple-system, BlinkMacSystemFont, Inter, Segoe UI, Helvetica Neue, Arial, sans-serif">
+  <defs>
+    <linearGradient id="compute" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3ed8a7"/>
+      <stop offset="1" stop-color="#1ba47a"/>
+    </linearGradient>
+    <linearGradient id="safe" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7aa9ff"/>
+      <stop offset="1" stop-color="#3b6fe0"/>
+    </linearGradient>
+    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#b388ff"/>
+      <stop offset="1" stop-color="#7c4dff"/>
+    </linearGradient>
+    <linearGradient id="s3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#777"/>
+      <stop offset="1" stop-color="#444"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a909b"/>
+    </marker>
+  </defs>
+
+  <style>
+    .lane { fill: none; stroke: #d6d9de; stroke-dasharray: 4 4; }
+    .box-label { fill: #fff; font-size: 13px; font-weight: 600; }
+    .box-sub { fill: rgba(255,255,255,.85); font-size: 11px; }
+    .caption { fill: #5b6470; font-size: 13px; }
+    .lane-label { fill: #8a909b; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .edge { stroke: #8a909b; stroke-width: 1.4; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .lane { stroke: #2a313a; }
+      .caption { fill: #9aa4b2; }
+      .lane-label { fill: #6e7681; }
+      .edge { stroke: #6e7681; }
+    }
+  </style>
+
+  <!-- App layer label -->
+  <text class="lane-label" x="36" y="42">apps</text>
+  <text class="caption" x="36" y="62">your service ↔ standard Postgres wire protocol</text>
+
+  <!-- Compute lane -->
+  <line class="lane" x1="20" y1="80" x2="700" y2="80"/>
+  <text class="lane-label" x="36" y="105">compute (scale to zero)</text>
+  <g>
+    <rect x="100" y="120" width="160" height="56" rx="10" fill="url(#compute)"/>
+    <text class="box-label" x="180" y="145" text-anchor="middle">Postgres compute</text>
+    <text class="box-sub" x="180" y="163" text-anchor="middle">your live DB</text>
+
+    <rect x="280" y="120" width="160" height="56" rx="10" fill="url(#compute)" opacity=".82"/>
+    <text class="box-label" x="360" y="145" text-anchor="middle">Postgres compute</text>
+    <text class="box-sub" x="360" y="163" text-anchor="middle">branch: pr-1234</text>
+
+    <rect x="460" y="120" width="160" height="56" rx="10" fill="url(#compute)" opacity=".55"/>
+    <text class="box-label" x="540" y="145" text-anchor="middle">Postgres compute</text>
+    <text class="box-sub" x="540" y="163" text-anchor="middle">asleep · $0</text>
+  </g>
+
+  <!-- arrows compute → safe -->
+  <path class="edge" d="M180 178 L180 212" marker-end="url(#arrow)"/>
+  <path class="edge" d="M360 178 L360 212" marker-end="url(#arrow)"/>
+  <text class="caption" x="200" y="200" font-size="11">WAL stream</text>
+
+  <!-- Safekeeper lane -->
+  <line class="lane" x1="20" y1="220" x2="700" y2="220"/>
+  <text class="lane-label" x="36" y="245">safekeepers (durable WAL, quorum)</text>
+  <g>
+    <rect x="180" y="260" width="120" height="44" rx="9" fill="url(#safe)"/>
+    <text class="box-label" x="240" y="287" text-anchor="middle">Safekeeper</text>
+
+    <rect x="310" y="260" width="120" height="44" rx="9" fill="url(#safe)"/>
+    <text class="box-label" x="370" y="287" text-anchor="middle">Safekeeper</text>
+
+    <rect x="440" y="260" width="120" height="44" rx="9" fill="url(#safe)"/>
+    <text class="box-label" x="500" y="287" text-anchor="middle">Safekeeper</text>
+  </g>
+
+  <!-- arrow safe → page -->
+  <path class="edge" d="M370 305 L370 335" marker-end="url(#arrow)"/>
+  <text class="caption" x="380" y="324" font-size="11">apply + checkpoint</text>
+
+  <!-- Pageserver + S3 lane -->
+  <line class="lane" x1="20" y1="345" x2="700" y2="345"/>
+  <text class="lane-label" x="36" y="370">pageserver + object storage</text>
+  <g>
+    <rect x="220" y="380" width="160" height="30" rx="9" fill="url(#page)"/>
+    <text class="box-label" x="300" y="400" text-anchor="middle">Pageserver</text>
+
+    <rect x="420" y="380" width="160" height="30" rx="9" fill="url(#s3)"/>
+    <text class="box-label" x="500" y="400" text-anchor="middle">Object storage (S3)</text>
+
+    <path class="edge" d="M380 395 L420 395" marker-end="url(#arrow)" marker-start="url(#arrow)"/>
+  </g>
+</svg>
