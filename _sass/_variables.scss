@@ -1,28 +1,93 @@
-
 //
-// VARIABLES
+// Theme tokens (light + dark)
 //
 
-// Colors
-$blue: #4183C4;
+:root {
+  color-scheme: light dark;
 
-// Grays
-$black: #000;
-$darkerGray: #222;
-$darkGray: #333;
-$gray: #666;
-$lightGray: #eee;
-$white: #fff;
+  // Light defaults
+  --bg:          #ffffff;
+  --bg-soft:     #f7f8fa;
+  --surface:     #ffffff;
+  --text:        #1a1a1a;
+  --text-muted:  #5b6470;
+  --text-dim:    #8a909b;
+  --border:      #e6e8eb;
+  --border-soft: #eef0f3;
+  --accent:      #1d6fbf;
+  --accent-soft: rgba(29, 111, 191, 0.10);
+  --code-bg:     #f4f6f8;
+  --code-text:   #1f2937;
+  --selection:   #ffe58a;
+  --shadow:      0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px -12px rgba(0, 0, 0, 0.10);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:          #0d1117;
+    --bg-soft:     #11161d;
+    --surface:     #161b22;
+    --text:        #e6edf3;
+    --text-muted:  #9aa4b2;
+    --text-dim:    #6e7681;
+    --border:      #2a313a;
+    --border-soft: #1c232c;
+    --accent:      #58a6ff;
+    --accent-soft: rgba(88, 166, 255, 0.14);
+    --code-bg:     #161b22;
+    --code-text:   #c9d1d9;
+    --selection:   rgba(88, 166, 255, 0.32);
+    --shadow:      0 1px 2px rgba(0, 0, 0, 0.35), 0 12px 28px -16px rgba(0, 0, 0, 0.55);
+  }
+}
+
+// Manual toggle overrides system pref
+:root[data-theme="light"] {
+  --bg:          #ffffff;
+  --bg-soft:     #f7f8fa;
+  --surface:     #ffffff;
+  --text:        #1a1a1a;
+  --text-muted:  #5b6470;
+  --text-dim:    #8a909b;
+  --border:      #e6e8eb;
+  --border-soft: #eef0f3;
+  --accent:      #1d6fbf;
+  --accent-soft: rgba(29, 111, 191, 0.10);
+  --code-bg:     #f4f6f8;
+  --code-text:   #1f2937;
+  --selection:   #ffe58a;
+}
+
+:root[data-theme="dark"] {
+  --bg:          #0d1117;
+  --bg-soft:     #11161d;
+  --surface:     #161b22;
+  --text:        #e6edf3;
+  --text-muted:  #9aa4b2;
+  --text-dim:    #6e7681;
+  --border:      #2a313a;
+  --border-soft: #1c232c;
+  --accent:      #58a6ff;
+  --accent-soft: rgba(88, 166, 255, 0.14);
+  --code-bg:     #161b22;
+  --code-text:   #c9d1d9;
+  --selection:   rgba(88, 166, 255, 0.32);
+}
+
+// Legacy SCSS color vars (kept so older imports don't break)
+$blue:        var(--accent);
+$black:       var(--text);
+$darkerGray:  var(--text);
+$darkGray:    var(--text);
+$gray:        var(--text-muted);
+$lightGray:   var(--border);
+$white:       var(--bg);
 
 // Font stacks
-$helvetica: Helvetica, Arial, sans-serif;
-$helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$georgia: Georgia, serif;
-$fonts: IRANSans, sans-serif;
+$mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+$fonts: IRANSans, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 
-// Mobile breakpoints
+// Breakpoints
 @mixin mobile {
-  @media screen and (max-width: 640px) {
-    @content;
-  }
+  @media screen and (max-width: 640px) { @content; }
 }

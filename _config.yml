@@ -1,12 +1,11 @@
-
-title: Hamid FzM
-author: Hamid FzM
+title: Hamid Feizabadi
+author: Hamid Feizabadi
 
 # Short bio or description (displayed in the header)
-description: یه توسعه‌دهنده خسته دیگه
+description: یادداشت‌های یک مهندس نرم‌افزار · پایتون · گو · هوش مصنوعی
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://avatars2.githubusercontent.com/u/5591800
+avatar: https://avatars.githubusercontent.com/u/5591800
 
 #
 # Flags below are optional
@@ -14,19 +13,12 @@ avatar: https://avatars2.githubusercontent.com/u/5591800
 
 # Includes an icon in the footer for each username you enter
 links:
-  dribbble:
-  email: contact@hamidfzm.ir
-  facebook:
-  flickr:
+  email: contact@hamidfzm.com
   github: hamidfzm
-  instagram:
-  linkedin:
-  pinterest:
+  linkedin: hamidfzm
+  x: hamidfzm
+  huggingface: hamidfzm
   rss: yes
-  twitter: hamidfzm
-  stackoverflow: users/2837388/hamid-fzm
-  youtube: # channel/<your_long_string> or user/<user-name>
-  googleplus: # anything in your profile username that comes after plus.google.com/
 
 
 # Enter your Disqus shortname (not your username) to enable commenting on posts
@@ -38,8 +30,8 @@ google_analytics: UA-125825710-1
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: https://blog.hamidfzm.ir
-website: https://hamidfzm.ir
+url: https://blog.hamidfzm.com
+website: https://hamidfzm.com
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
@@ -77,8 +69,10 @@ paginate_path: "/:num/"
 
 
 plugins:
-  - jekyll-sitemap # Create a sitemap using the official Jekyll sitemap gem
-  - jekyll-feed # Create an Atom feed using the official Jekyll feed gem
+  - jekyll-sitemap   # XML sitemap
+  - jekyll-feed      # Atom feed
+  - jekyll-seo-tag   # <meta> tags for SEO + social sharing
+  - jekyll-paginate  # Pagination
 
 # Exclude these files from your production _site
 exclude:
@@ -88,5 +82,10 @@ exclude:
   - README.md
   - CNAME
   - .idea
+  - .github
+  - node_modules
+  - vendor
   - serve.sh
 
+lang: fa
+timezone: Asia/Tehran

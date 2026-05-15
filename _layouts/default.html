@@ -1,44 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ site.lang | default: 'fa' }}" dir="rtl">
 <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.description }}</title>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.title }}</title>
 
     {% include meta.html %}
 
-    <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" href="{{ '/style.css' | relative_url }}"/>
+    <link rel="alternate" type="application/rss+xml"
+          title="{{ site.title }} - {{ site.description }}"
+          href="{{ '/feed.xml' | relative_url }}"/>
 
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css"/>
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} - {{ site.description }}"
-          href="{{ site.baseurl }}/feed.xml"/>
-
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    <script>
+      // Apply saved theme before paint to avoid flash
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t === 'light' || t === 'dark') {
+            document.documentElement.setAttribute('data-theme', t);
+          }
+        } catch (e) {}
+      })();
+    </script>
 </head>
 
-<body dir="auto">
+<body>
 <div class="wrapper-masthead">
     <div class="container">
-        <header class="masthead clearfix">
-            <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}"/></a>
+        <header class="masthead">
+            <a href="{{ '/' | relative_url }}" class="site-avatar" aria-label="{{ site.title }}">
+                <img src="{{ site.avatar }}" alt="{{ site.author }}" width="56" height="56" loading="eager"/>
+            </a>
 
             <div class="site-info">
-                <h1 class="site-title"><a href="{{ site.baseurl }}/">{{ site.title }}</a></h1>
+                <h1 class="site-title">
+                    <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+                </h1>
                 <p class="site-description">{{ site.description }}</p>
             </div>
 
-            <nav>
+            <nav aria-label="ناوبری اصلی">
                 <a href="{{ site.website }}/">وب‌سایت</a>
-                <a href="{{ site.baseurl }}/projects">پروژه‌ها</a>
-                <a href="{{ site.baseurl }}/about">درباره‌‌ی من</a>
+                <a href="{{ '/projects' | relative_url }}">پروژه‌ها</a>
+                <a href="{{ '/about'    | relative_url }}">درباره‌ی من</a>
+
+                <button class="theme-toggle" type="button"
+                        aria-label="تغییر تم روشن و تاریک"
+                        title="تغییر تم">
+                    <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                              d="M12 4V2m0 20v-2M4 12H2m20 0h-2M5.6 5.6 4.2 4.2m15.6 15.6-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4"/>
+                        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                    </svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="currentColor" d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+                    </svg>
+                </button>
             </nav>
         </header>
     </div>
 </div>
 
-<div id="main" role="main" class="container">
+<main id="main" role="main" class="container">
     {{ content }}
-</div>
+</main>
 
 <div class="wrapper-footer">
     <div class="container">
@@ -47,6 +71,23 @@
         </footer>
     </div>
 </div>
+
+<script>
+  (function () {
+    var btn = document.querySelector('.theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var cur = document.documentElement.getAttribute('data-theme');
+      var sysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var next;
+      if (cur === 'dark') next = 'light';
+      else if (cur === 'light') next = 'dark';
+      else next = sysDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+    });
+  })();
+</script>
 
 {% include analytics.html %}
 </body>

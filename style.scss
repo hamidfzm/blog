@@ -1,307 +1,348 @@
 ---
 ---
 
-//
-// IMPORTS
-//
 @import "fonts";
 @import "reset";
 @import "variables";
 
-// Syntax highlighting @import is at the bottom of this file
-
-/**************/
-/* BASE RULES */
-/**************/
+/* ------------ Base ------------ */
 
 html {
   font-size: 100%;
+  scrollbar-gutter: stable;
 }
 
 body {
-  background: $white;
-  font: 18px/1.4 $fonts;
-  color: $darkGray;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.65 $fonts;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background 220ms ease, color 220ms ease;
 }
 
 .container {
   margin: 0 auto;
-  max-width: 740px;
-  padding: 0 10px;
+  max-width: 720px;
+  padding: 0 20px;
   width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $fonts;
-  color: $darkerGray;
-  font-weight: bold;
-
-  line-height: 1.7;
-  margin: 1em 0 15px;
-  padding: 0;
-
-  @include mobile {
-    line-height: 1.4;
-  }
+  color: var(--text);
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 1.8em 0 0.6em;
 }
 
-h1 {
-  font-size: 30px;
-
-  a {
-    color: inherit;
-  }
-}
-
-h2 {
-  font-size: 24px;
-
-  a {
-    color: inherit;
-  }
-}
-
-h3 {
-  font-size: 20px;
-}
-
-h4 {
-  font-size: 18px;
-  color: $gray;
-}
+h1 { font-size: 28px; a { color: inherit; } }
+h2 { font-size: 22px; a { color: inherit; } }
+h3 { font-size: 19px; }
+h4 { font-size: 17px; color: var(--text-muted); }
 
 p {
-  margin: 15px 0;
-  text-indent: 20px;
-  text-align: justify;
+  margin: 14px 0;
 }
 
 a {
-  color: $blue;
+  color: var(--accent);
   text-decoration: none;
-  cursor: pointer;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, var(--accent) 30%, transparent);
+  transition: color 160ms ease, text-decoration-color 160ms ease;
 
-  &:hover, &:active {
-    color: $blue;
+  &:hover, &:focus-visible {
+    text-decoration: underline;
+    text-decoration-color: var(--accent);
   }
 }
 
-ul, ol {
-  margin: 15px 0;
-  padding-left: 30px;
-}
+ul, ol { margin: 14px 0; padding-inline-start: 28px; padding-inline-end: 0; }
+ul { list-style-type: disc; }
+ol { list-style-type: decimal; }
+ol ul, ul ol, ul ul, ol ol { margin: 0; }
+ul ul, ol ul { list-style-type: circle; }
 
-ul {
-  list-style-type: disc;
-}
+em, i { font-style: italic; }
+strong, b { font-weight: 700; }
 
-ol {
-  list-style-type: decimal;
-}
+img { max-width: 100%; height: auto; border-radius: 6px; }
+.gmnoprint img { max-width: none; }
 
-ol ul, ul ol, ul ul, ol ol {
-  margin: 0;
-}
-
-ul ul, ol ul {
-  list-style-type: circle;
-}
-
-em, i {
-  font-style: italic;
-}
-
-strong, b {
-  font-weight: bold;
-}
-
-img {
-  max-width: 100%;
-}
-
-// Fixes images in popup boxes from Google Translate
-.gmnoprint img {
-  max-width: none;
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
 }
 
 .date {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+::-moz-selection { color: var(--text); background: var(--selection); }
+::selection      { color: var(--text); background: var(--selection); }
+
+/* Inline + block code */
+code, pre, kbd, samp {
+  font-family: $mono;
+  font-size: 14px;
+}
+
+p code, li code, h1 code, h2 code, h3 code, h4 code {
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: 1px 6px;
+  border-radius: 5px;
+  border: 1px solid var(--border-soft);
+  font-size: 0.9em;
+}
+
+pre {
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: 14px 16px;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  overflow-x: auto;
+  line-height: 1.55;
+  direction: ltr;
+  text-align: left;
+}
+
+pre code { background: transparent; border: 0; padding: 0; }
+
+blockquote {
+  margin: 1.6em 0;
+  padding: 0.4em 1em;
+  border-inline-start: 3px solid var(--accent);
+  color: var(--text-muted);
   font-style: italic;
-  color: $gray;
+  background: var(--bg-soft);
+  border-radius: 6px;
 }
 
-// Specify the color of the selection
-::-moz-selection {
-  color: $black;
-  background: $lightGray;
-}
+/* ------------ Layout ------------ */
 
-::selection {
-  color: $black;
-  background: $lightGray;
-}
-
-// Nicolas Gallagher's micro clearfix hack
-// http://nicolasgallagher.com/micro-clearfix-hack/
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  display: table;
-}
-
-.clearfix:after {
-  clear: both;
-}
-
-/*********************/
-/* LAYOUT / SECTIONS */
-/*********************/
-
-//
-// .masthead
-//
-
-.wrapper-masthead {
-  margin-bottom: 50px;
-}
+.wrapper-masthead { margin-bottom: 40px; }
 
 .masthead {
-  padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px 18px;
 
   @include mobile {
-    text-align: center;
+    grid-template-columns: auto 1fr;
+    row-gap: 14px;
   }
 }
 
 .site-avatar {
-  float: right;
-  width: 70px;
-  height: 70px;
-  margin-left: 15px;
-
-  @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
-  }
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  grid-column: 1;
 
   img {
-    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    display: block;
   }
 }
 
 .site-info {
-  float: right;
-
-  @include mobile {
-    float: none;
-    display: block;
-    margin: 0 auto;
-  }
+  min-width: 0;
+  grid-column: 2;
 }
 
 .site-title {
   margin: 0;
-  color: $darkGray;
-  cursor: pointer;
   font-family: $fonts;
-  font-weight: 300;
-  font-size: 28px;
-  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.25;
+  letter-spacing: 0;
 
-  @include mobile {
-    margin: 1em 0 15px;
-    text-align: center;
-  }
+  a { color: var(--text); }
 }
 
 .site-description {
-  margin: -5px 0 0 0;
-  color: $gray;
-  font-size: 16px;
-
-  @include mobile {
-    margin-top: 3px;
-    text-align: center;
-  }
+  margin: 3px 0 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.4;
 }
 
 nav {
-  float: left;
-  margin-top: 23px; // @TODO: Vertically middle align
+  grid-column: 3;
   font-family: $fonts;
-  font-size: 18px;
+  font-size: 14.5px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
 
   @include mobile {
-    float: none;
-    margin-top: 9px;
-    display: block;
-    font-size: 16px;
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    justify-content: flex-start;
   }
 
   a {
-    margin-left: 20px;
-    color: $darkGray;
-    text-align: right;
-    font-weight: 300;
-    letter-spacing: 1px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 160ms ease;
 
-    @include mobile {
-      margin: 0 10px;
-      color: $blue;
+    &:hover, &:focus-visible { color: var(--text); }
+  }
+
+  .theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    cursor: pointer;
+    margin-inline-start: 4px;
+    transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+
+    &:hover, &:focus-visible {
+      color: var(--text);
+      border-color: var(--text-muted);
+      background: var(--bg-soft);
+      outline: none;
     }
+
+    svg { width: 16px; height: 16px; }
+    .icon-sun  { display: none; }
+    .icon-moon { display: block; }
   }
 }
 
-//
-// .main
-//
+:root[data-theme="dark"] nav .theme-toggle,
+:root:not([data-theme]) nav .theme-toggle {
+  @media (prefers-color-scheme: dark) {
+    .icon-sun  { display: block; }
+    .icon-moon { display: none; }
+  }
+}
+
+:root[data-theme="dark"] nav .theme-toggle {
+  .icon-sun  { display: block; }
+  .icon-moon { display: none; }
+}
+
+:root[data-theme="light"] nav .theme-toggle {
+  .icon-sun  { display: none; }
+  .icon-moon { display: block; }
+}
+
+/* ------------ Posts ------------ */
 
 .posts > .post {
-  display: inline-block;
-  padding-bottom: 2em;
-  border-bottom: 1px solid $lightGray;
+  display: block;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.posts > .post:last-child {
-  padding-bottom: 1em;
-  border-bottom: none;
-}
+.posts > .post:last-child { border-bottom: 0; }
 
 .post {
-  blockquote {
-    margin: 1.8em .8em;
-    border-left: 2px solid $gray;
-    padding: 0.1em 1em;
-    color: $gray;
-    font-size: 22px;
-    font-style: italic;
+  h1 { margin-top: 0; }
+
+  .read-more {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--accent);
+  }
+}
+
+/* ------------ Projects ------------ */
+
+.projects {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.project-card {
+  padding: 18px 20px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  transition: border-color 180ms ease, transform 180ms ease, background 180ms ease;
+
+  &:hover {
+    border-color: var(--border);
   }
 
-  .comments {
-    margin-top: 10px;
+  &__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+
+    h2 {
+      margin: 0;
+      font-size: 19px;
+
+      a { color: var(--text); }
+    }
+
+    .date {
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: $mono;
+      white-space: nowrap;
+      direction: ltr;
+    }
+  }
+
+  .entry {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.65;
   }
 
   .read-more {
-    text-transform: uppercase;
-    font-size: 15px;
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--accent);
   }
 }
 
+/* ------------ Footer ------------ */
+
 .wrapper-footer {
-  margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  background-color: $lightGray;
+  margin-top: 60px;
+  border-top: 1px solid var(--border);
+  background: var(--bg-soft);
+  transition: background 220ms ease, border-color 220ms ease;
 }
 
 footer {
-  padding: 20px 0;
+  padding: 22px 0;
   text-align: center;
+  color: var(--text-muted);
+  font-size: 14px;
 }
 
-// Settled on moving the import of syntax highlighting to the bottom of the CSS
-// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 @import "pagination";
 @import "svg-icons";

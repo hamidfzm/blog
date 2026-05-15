@@ -4,20 +4,25 @@ title: پروژه‌ها
 permalink: /projects
 ---
 
-<div class="posts" dir="auto">
-    {% for page in site.pages %}
-        {% if page.layout == "project" %}
-            <article class="post">
+{% assign projects = site.pages | where: "layout", "project" | sort: "date" | reverse %}
 
-                <h2><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a></h2>
+<div class="projects">
+    {% for project in projects %}
+        <article class="project-card">
+            <header class="project-card__head">
+                <h2><a href="{{ project.url | relative_url }}">{{ project.title }}</a></h2>
+                {% if project.date %}
+                    <time class="date" datetime="{{ project.date | date_to_xmlschema }}">
+                        {{ project.date | date: "%Y / %m" }}
+                    </time>
+                {% endif %}
+            </header>
 
-                <div class="entry">
-                    {{ page.content | strip_html | truncatewords: 50 }}
-                </div>
+            <div class="entry">
+                {{ project.content | strip_html | truncatewords: 40 }}
+            </div>
 
-                <a href="{{ page.baseurl }}{{ page.url }}" class="read-more">ادامه</a>
-            </article>
-        {% endif %}
+            <a href="{{ project.url | relative_url }}" class="read-more">ادامه</a>
+        </article>
     {% endfor %}
 </div>
-
