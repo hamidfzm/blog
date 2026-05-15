@@ -31,11 +31,11 @@ links:
 comments:
   giscus:
     repo: hamidfzm/blog
-    repo_id: ""           # paste from giscus.app
-    category: Comments    # the GitHub Discussions category to use
-    category_id: ""       # paste from giscus.app
+    repo_id: "MDEwOlJlcG9zaXRvcnkxNTE1OTIzMTE="
+    category: Comments
+    category_id: "DIC_kwDOCQkdd84C9JEw"
     mapping: pathname
-    input_position: top
+    input_position: bottom
     theme: preferred_color_scheme
     lang: fa
 
